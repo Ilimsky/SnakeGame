@@ -1,5 +1,3 @@
-import org.omg.CORBA.TRANSACTION_MODE;
-
 import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.*;
@@ -34,6 +32,7 @@ public class GameField extends JPanel implements ActionListener{
         loadImages();
         initGame();
         addKeyListener(new FieldKeyListener());
+        setFocusable(true);
     }
 
     //Functions
@@ -88,7 +87,7 @@ public class GameField extends JPanel implements ActionListener{
         }if (up){
             y[0] -= DOT_SIZE;
         }if (down){
-            x[0] += DOT_SIZE;
+            y[0] += DOT_SIZE;
         }
     }
 
@@ -131,28 +130,24 @@ public class GameField extends JPanel implements ActionListener{
         public void keyPressed(KeyEvent e) {
             super.keyPressed(e);
             int key = e.getKeyCode();
-            if (key == KeyEvent.VK_LEFT ){
+            if (key == KeyEvent.VK_LEFT && !rigth){
                 left = true;
-                rigth = false;
                 up = false;
                 down = false;
-            }if (key == KeyEvent.VK_RIGHT){
+            }if (key == KeyEvent.VK_RIGHT && !left){
                 rigth = true;
-                left = false;
                 up = false;
                 down = false;
-            }if (key == KeyEvent.VK_UP){
+            }if (key == KeyEvent.VK_UP && !down){
                 up = true;
-                down = false;
                 rigth = false;
                 left = false;
-            }if (key == KeyEvent.VK_DOWN) {
+            }if (key == KeyEvent.VK_DOWN && !up) {
                 down = true;
-                up = false;
                 rigth = false;
                 left = false;
             }
-    }
+        }
 
     }
 }
